@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
 
-const PortSchema = new mongoose.Schema({
-  portId: { type: Number, required: true, unique: true },
-  status: { type: String, enum: ['active', 'error', 'empty'], default: 'empty' },
-  device: { type: String, default: 'Unassigned' },
-  mac: { type: String, default: '-' },
-  speed: { type: String, default: '-' },
-  vlan: { type: String, default: '-' }
+const portSchema = new mongoose.Schema({
+  source: { type: String, required: true },
+  destination: { type: String, required: true },
+  cableTag: { type: String, required: true },
+  status: { type: String, default: 'active' },
+  
+  // 👇 THE NEW FIELD FOR PDF EXPORTS 👇
+  cableType: { type: String, default: 'CAT6' },
+  
+  dateAdded: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('Port', PortSchema);
+module.exports = mongoose.model('Port', portSchema);

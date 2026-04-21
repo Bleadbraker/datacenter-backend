@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 
-const EquipmentSchema = new mongoose.Schema({
+const equipmentSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  type: { type: String, enum: ['Server', 'Network', 'Storage'], required: true },
-  size: { type: Number, required: true }, // How many U-spaces it takes
-  startU: { type: Number, required: true }, // The slot number it starts at
-  status: { type: String, default: 'online' }
+  type: { type: String, required: true },
+  size: { type: Number, required: true },
+  startU: { type: Number, required: true },
+  status: { type: String, default: 'online' },
+  
+  // 👇 THE TWO NEW FIELDS YOU REQUESTED 👇
+  serialNumber: { type: String, default: '' },
+  modelName: { type: String, default: '' }
 });
 
-module.exports = mongoose.model('Equipment', EquipmentSchema);
+module.exports = mongoose.model('Equipment', equipmentSchema);
